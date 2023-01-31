@@ -3,9 +3,10 @@ import { formatData } from './formatData';
 
 export const fetchWorks = async () => {
     const response = await fetch(
-      `${
-        import.meta.env.VITE_WP_URL
-      }/wp-json/acf/v3/works`,
+      // `${
+      //   import.meta.env.VITE_WP_URL
+      // }/wp-json/acf/v3/works`,
+      'https://bjornverlinde.studio/wp-json/acf/v3/works',
       {
         headers: {
           'Content-Type': 'application/json',

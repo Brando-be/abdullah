@@ -2,9 +2,10 @@
 
 export const fetchSiteData = async () => {
     const response = await fetch(
-      `${
-        import.meta.env.VITE_WP_URL
-      }/wp-json/acf/v3/pages/10`,
+      // `${
+      //   import.meta.env.VITE_WP_URL
+      // }/wp-json/acf/v3/pages/10`,
+      'https://bjornverlinde.studio/wp-json/acf/v3/pages/10',
       {
         headers: {
           'Content-Type': 'application/json',
