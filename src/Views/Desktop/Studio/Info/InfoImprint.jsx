@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
+import { resources } from '../../../../i18n/resources';
 
 const InfoImprintWrapper = styled.div`
   grid-column: 2/4;
@@ -33,30 +35,24 @@ const CreditItemTitle = styled.span`
 `;
 
 export const InfoImprint = () => {
+  const { t } = useTranslation();
+  const Brands = resources.en.translation.Brands
+  console.log(Brands,"Brands");
   return (
     <InfoImprintWrapper>
       <InfoImprintText>
-        Responsible for the content of this website: <br /> Studio Bjorn
-        Verlinde, Hugo Verriestlaan 5 B - 8800 Roeselare, (Belgium),+32 (0)499
-        737 487 Ondernemingsnr. BE 0659 715 014, Arrondissement Kortrijk
+        Responsible for the content of this website: <br />
+        {t('Imprint')}
       </InfoImprintText>
       <CreditsList>
         <ImprintTitle>CREDITS</ImprintTitle> <br />
-        <CreditListItem>
-          <CreditItemTitle>Brando,</CreditItemTitle> Design & development
-        </CreditListItem>
-        <CreditListItem>
-          <CreditItemTitle>Typefaces,</CreditItemTitle> Suisse Works & Muoto{' '}
-        </CreditListItem>
-        <CreditListItem>
-          <CreditItemTitle>
-            Frederik Vercruysse, Nathan Van Haver, Lies Willaert,
-          </CreditItemTitle>{' '}
-          Photographers
-        </CreditListItem>
-        <CreditListItem>
-          <CreditItemTitle>Bliksem&Donder,</CreditItemTitle> Texts
-        </CreditListItem>
+        {Brands.map((brand, index) => {
+            return(
+              <CreditListItem key={index}>
+                <CreditItemTitle key={index}>{brand.brand},</CreditItemTitle> {brand.work_categories}
+              </CreditListItem>
+            )
+        })}
       </CreditsList>
     </InfoImprintWrapper>
   );

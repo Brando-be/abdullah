@@ -61,6 +61,9 @@ export const resources = {
       Realisation: siteData.acf.en_realisation,
       RealisationText: siteData.acf.en_realisation_description,
 
+      //Peoples
+      Peoples:siteData.acf.peoples,
+
       //Clients
       AboutClient: siteData.acf.about_client,
       SelectedClients: siteData.acf.extra_about_client,
@@ -80,6 +83,8 @@ export const resources = {
       JobEmail: siteData.acf.jobs_and_internships_email,
       Instagram: siteData.acf.instagram,
       OfficeHrs: siteData.acf.office_hours,
+      Imprint: siteData.acf.content_responsible,
+      Brands: siteData.acf.brands
 
     },
   },
@@ -166,6 +171,8 @@ export const resources = {
       JobEmail: siteData.acf.jobs_and_internships_email,
       Instagram: siteData.acf.instagram,
       OfficeHrs: siteData.acf.office_hours,
+      Imprint: siteData.acf.content_responsible,
+      Brands: siteData.acf.brands
     },
   },
 };
