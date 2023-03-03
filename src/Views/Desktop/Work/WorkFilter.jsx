@@ -18,12 +18,14 @@ const FilterWrapper = styled.div`
   display: flex;
   align-items: end;
   flex-flow: row;
-  :hover p{
+  :hover p {
     text-decoration: underline;
   }
 
-  span{
+  span {
     margin-right: 0.8rem;
+    font-family: Base Grotesk, sans-serif;
+    padding-bottom: 1px;
   }
 `;
 
@@ -47,60 +49,55 @@ export const WorkFilter = ({ setNewFilter, filter }) => {
   if (filter !== '') {
     return (
       <FilterWrapper onClick={() => setOpenFilter(false)}>
-        <span>
-        {'—'}
-        </span>
+        <span>{'-'}</span>
         <FilterItem
           underlined={filter === 'all' ? true : false}
-          onClick={() => setNewFilter('')}>
+          onClick={() => setNewFilter('')}
+        >
           {t('all')}
         </FilterItem>
-        <span>
-        {',  '}
-        </span>
+        <span>{',  '}</span>
         <FilterItem
           underlined={filter === 'retail' ? true : false}
-          onClick={() => setNewFilter('retail')}>
+          onClick={() => setNewFilter('retail')}
+        >
           {t('retail')}
         </FilterItem>
-        <span>
-        {',  '}
-        </span>
+        <span>{',  '}</span>
         <FilterItem
           underlined={filter === 'hospitality' ? true : false}
-          onClick={() => setNewFilter('hospitality')}>
+          onClick={() => setNewFilter('hospitality')}
+        >
           {t('hospitality')}
         </FilterItem>
-        <span>
-        {',  '}</span>
+        <span>{',  '}</span>
         <FilterItem
           underlined={filter === 'public space' ? true : false}
-          onClick={() => setNewFilter('public space')}>
+          onClick={() => setNewFilter('public space')}
+        >
           {t('public space')}
         </FilterItem>
-        <span>
-        {',  '}
-        </span>
+        <span>{',  '}</span>
         <FilterItem
           underlined={filter === 'private' ? true : false}
-          onClick={() => setNewFilter('private')}>
+          onClick={() => setNewFilter('private')}
+        >
           {t('private')}
         </FilterItem>
-        <span>
-        {', '}
-        </span>
+        <span>{', '}</span>
         <FilterItem
           underlined={filter === 'object' ? true : false}
-          onClick={() => setNewFilter('object')}>
+          onClick={() => setNewFilter('object')}
+        >
           {t('object')}
         </FilterItem>
       </FilterWrapper>
     );
   }
   return (
-    <FilterWrapper
-      onClick={() => setNewFilter('all')}>
-     <span>+</span><p>  Filter</p>
+    <FilterWrapper onClick={() => setNewFilter('all')}>
+      <span>+</span>
+      <p> Filter</p>
     </FilterWrapper>
   );
 };

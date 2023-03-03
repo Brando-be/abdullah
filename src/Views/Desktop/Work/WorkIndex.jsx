@@ -39,7 +39,7 @@ const LinkWrapper = styled.div`
 const StyledLink = styled(Link)`
   text-decoration: none;
   font-size: 0.8vw;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   margin: 0;
 
   :hover {
@@ -139,13 +139,16 @@ export const WorkIndex = () => {
           return (
             <WorkIndexItem
               notCrossed={
-                filter === work.acf.category || filter === 'all' || filter === ''
+                filter === work.acf.category ||
+                filter === 'all' ||
+                filter === ''
                   ? true
                   : false
               }
               onClick={() => navigateToDetail(work.acf.title)}
               key={work.title}
-              nr={number}>
+              nr={number}
+            >
               <WorkIndexNumber className='backgroundHover'>
                 {number.toLocaleString('en-US', {
                   minimumIntegerDigits: 2,

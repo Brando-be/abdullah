@@ -101,6 +101,16 @@ export const Studio = () => {
 
   return (
     <StudioWrapper>
+      <div
+        style={{
+          position: 'fixed',
+          top: 0,
+          width: '100%',
+          height: '50px',
+          background: '#e3e3e3',
+          zIndex: 1,
+        }}
+      />
       <BjornTextTopMobile to='/home'>Studio,</BjornTextTopMobile>
       <LongReadWrapper>
         <StudioSection ref={aboutRef}>
@@ -110,9 +120,7 @@ export const Studio = () => {
             {t('Established')}
             {t('Designer')}
           </LongReadText>
-          <LongReadText>
-          {t('AboutMore')}
-          </LongReadText>
+          <LongReadText>{t('AboutMore')}</LongReadText>
         </StudioSection>
         <StudioSection ref={approachRef}>
           <AproachText>

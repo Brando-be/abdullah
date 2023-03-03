@@ -7,15 +7,15 @@ import { StudioProfile } from './Views/Desktop/Studio/Profile';
 import { WorkDetail } from './Views/Desktop/Work/WorkDetail';
 import { WorkIndex } from './Views/Desktop/Work/WorkIndex';
 
-import { MobileScreen as MainScreen } from './Views/Mobile/Screen';
-import { Home as HomeMobile } from './Views/Mobile/Home';
-import { Work as WorkMobile } from './Views/Mobile/Work';
-import { Studio as StudioMobile } from './Views/Mobile/Studio';
-import { WorkDetail as WorkDetailMobile } from './Views/Mobile/Work/WorkDetail';
-import { InfoContact } from './Views/Mobile/Info/InfoContact';
 import { CirclePointer } from './Components/CirlePointer';
 import { WorkPointer } from './Components/WorkPointer';
 import { WorkOverview } from './Views/Desktop/Work/WorkOverview';
+import { Home as HomeMobile } from './Views/Mobile/Home';
+import MobileInfo from './Views/Mobile/Info';
+import { MobileScreen as MainScreen } from './Views/Mobile/Screen';
+import { Studio as StudioMobile } from './Views/Mobile/Studio';
+import { Work as WorkMobile } from './Views/Mobile/Work';
+import { WorkDetail as WorkDetailMobile } from './Views/Mobile/Work/WorkDetail';
 
 const QuerryDiv = styled.div`
   width: 100vw;
@@ -71,7 +71,7 @@ export const App = () => {
         <Routes>
           <Route path='/work/:workTitle' element={<WorkDetailMobile />} />
           <Route path='/studio' element={<StudioMobile />} />
-          <Route path='/info' element={<InfoContact />} />
+          <Route path='/info' element={<MobileInfo />} />
           <Route path='/work' element={<WorkMobile />} />
           <Route path='/home' element={<HomeMobile />} />
           <Route path='/' element={<MainScreen />} />

@@ -1,11 +1,13 @@
-import i18next from 'i18next';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+import { Autoplay, Keyboard } from 'swiper';
+import 'swiper/css';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import { LanguageChange } from '../../../Components/LanguageChange';
 import { works } from '../../../Constants/Works';
-import { BjornTextTop, StyledLink, fadeDelayWork } from '../../../style';
+import { BjornTextTop, fadeDelayWork, StyledLink } from '../../../style';
 import { searchByTitle, searchIndexByTitle } from '../../../utils/findWorks';
 import useMousePos from '../../../utils/useMousePos';
 import { WorkImage } from './WorkImage';
@@ -29,7 +31,7 @@ const InfoWrapper = styled.div`
 
 const SmallText = styled.p`
   font-size: 0.8vw;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   margin: 0.5rem 0 0 0;
 `;
 
@@ -101,6 +103,7 @@ const WorkWrapper = styled.div`
 `;
 
 export const WorkDetail = () => {
+  const [swiperInstance, setSwiperInstance] = useState();
   const [showImages, setShowImages] = useState(true);
   let navigate = useNavigate();
   const [imgRefs, setImgRefs] = useState([]);
@@ -110,30 +113,26 @@ export const WorkDetail = () => {
   const work = searchByTitle(workTitle);
   const scrollRef = useRef();
 
-  useEffect(() => {
-    if (imgRefIndex >= imgRefs) {
-      return;
-    }
-    const scroll = setInterval(
-      () => imgRefs[imgRefIndex].current.scrollIntoView(),
-      10000
-    );
+  const { pathname } = useLocation();
+  const [showSlider, setShowSlider] = useState(true);
 
-    return () => clearInterval(scroll);
-  }, []);
+  useEffect(() => {
+    setShowSlider((pre) => !pre);
+  }, [pathname]);
 
   const { x, y } = useMousePos();
 
-  const scrollDirectionDiv = (e) => {
-    const devideBy = scrollRef.current.scrollWidth / work.acf.images.length;
-    const scrollDevided = e.target.scrollLeft / devideBy + 1;
-    if (Math.round(scrollDevided) < 1) {
-      setImgRefIndex(1);
-    } else if (imgRefIndex <= work.acf.images.length) {
-      setImgRefIndex(Math.round(scrollDevided));
-    }
-  };
-  const lang = i18next.language;
+  // const scrollDirectionDiv = (e) => {
+  //   const devideBy = scrollRef.current.scrollWidth / work.acf.images.length;
+  //   const scrollDevided = e.target.scrollLeft / devideBy + 1;
+  //   if (Math.round(scrollDevided) < 1) {
+  //     setImgRefIndex(1);
+  //   } else if (imgRefIndex <= work.acf.images.length) {
+  //     setImgRefIndex(Math.round(scrollDevided));
+  //   }
+  // };
+
+  // const lang = i18next.language;
 
   // const showNewImage = (e) => {
   //   console.log(e.target.innerHTML);
@@ -160,17 +159,18 @@ export const WorkDetail = () => {
 
   const { t } = useTranslation();
 
-  const handleKeySwipe = (e) => {
-    if (e.key === '37') {
-      const index = imgRefIndex - 1;
-      imgRefs[index].current.scrollIntoView();
-    } else if (e.key === '39') {
-      const index = imgRefIndex + 1;
-      imgRefs[index].current.scrollIntoView();
-    }
-  };
+  // const handleKeySwipe = (e) => {
+  // if (e.key === '37') {
+  //   const index = imgRefIndex - 1;
+  //   imgRefs[index].current.scrollIntoView();
+  // } else if (e.key === '39') {
+  //   const index = imgRefIndex + 1;
+  //   imgRefs[index].current.scrollIntoView();
+  // }
+  // };
 
   const newProject = (e) => {
+    setImgRefIndex(1);
     if (e.target.innerHTML === 'Tekst' || e.target.innerHTML === 'Text') {
       setShowImages(false);
     } else {
@@ -178,7 +178,6 @@ export const WorkDetail = () => {
     }
     const workIndex = searchIndexByTitle(workTitle);
     let index = workIndex;
-    console.log(workIndex);
     if (
       y < window.innerHeight / 8 &&
       x > (window.innerWidth / 5) * 2 &&
@@ -205,12 +204,18 @@ export const WorkDetail = () => {
         index = workIndex + 1;
       }
       navigate(`/work/${works[index].acf.title}`);
+      if (swiperInstance) {
+        swiperInstance.loopDestroy();
+        swiperInstance.loopCreate();
+        swiperInstance.slideTo(0);
+      }
     }
   };
   return (
     <DetailWrapper
       onClick={(e) => newProject(e)}
-      onkeydown={(e) => handleKeySwipe(e)}>
+      // onkeydown={(e) => handleKeySwipe(e)}
+    >
       <InfoWrapper>
         <BjornTextTop to='/'>
           {t('For')} {work.acf.client}
@@ -220,23 +225,75 @@ export const WorkDetail = () => {
         </SmallText>
       </InfoWrapper>
       <WorkWrapper>
-        <WorkImagesWrapper
-          ref={scrollRef}
-          onScroll={(e) => scrollDirectionDiv(e)}>
-          {work.acf.images.map((img, index) => {
-            const imageName = img.image;
-            return (
-              <WorkImage
-                index={index}
-                setImgRefs={setImgRefs}
-                imgRefs={imgRefs}
-                imgName={imageName}
-                imgLength={work.acf.images.length}
-                setImgRestart={setImgRestart}
-                imgRestart={imgRestart}
-              />
-            );
-          })}
+        <WorkImagesWrapper ref={scrollRef}>
+          {showSlider && (
+            <Swiper
+              direction={'vertical'}
+              onRealIndexChange={(e) => {
+                setImgRefIndex(e.realIndex + 1 || 1);
+              }}
+              autoplay={{ disableOnInteraction: false }}
+              speed={1000}
+              modules={[Autoplay, Keyboard]}
+              className='mySwiper'
+              keyboard={{
+                enabled: true,
+                onlyInViewport: false,
+              }}
+              loop
+            >
+              {work.acf.images.map((img, index) => {
+                const imageName = img.image;
+                return (
+                  <SwiperSlide>
+                    <WorkImage
+                      index={index}
+                      setImgRefs={setImgRefs}
+                      imgRefs={imgRefs}
+                      imgName={imageName}
+                      imgLength={work.acf.images.length}
+                      setImgRestart={setImgRestart}
+                      imgRestart={imgRestart}
+                    />
+                  </SwiperSlide>
+                );
+              })}
+            </Swiper>
+          )}
+          {!showSlider && (
+            <Swiper
+              direction={'vertical'}
+              onRealIndexChange={(e) => {
+                setImgRefIndex(e.realIndex + 1 || 1);
+              }}
+              autoplay={{ disableOnInteraction: false }}
+              speed={1000}
+              modules={[Autoplay, Keyboard]}
+              className='mySwiper'
+              keyboard={{
+                enabled: true,
+                onlyInViewport: false,
+              }}
+              loop
+            >
+              {work.acf.images.map((img, index) => {
+                const imageName = img.image;
+                return (
+                  <SwiperSlide>
+                    <WorkImage
+                      index={index}
+                      setImgRefs={setImgRefs}
+                      imgRefs={imgRefs}
+                      imgName={imageName}
+                      imgLength={work.acf.images.length}
+                      setImgRestart={setImgRestart}
+                      imgRestart={imgRestart}
+                    />
+                  </SwiperSlide>
+                );
+              })}
+            </Swiper>
+          )}
         </WorkImagesWrapper>
         <WorkTextInfo showText={!showImages} work={work} />
       </WorkWrapper>
@@ -259,7 +316,7 @@ export const WorkDetail = () => {
           </TextImgButton>
         )}
       </SmallTextBottom>
-      <BackToWorkLink to={'/'}>{t('BackHome')}</BackToWorkLink>
+      <BackToWorkLink to={'/work'}>{t('BackToWork')}</BackToWorkLink>
       <LanguageChange />
     </DetailWrapper>
   );

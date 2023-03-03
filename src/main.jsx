@@ -5,10 +5,10 @@ import { App } from './App';
 import { GlobalStyle } from './Components/GlobalStyle';
 import { fetchWorks } from './utils/getWorks';
 import './i18n';
-import CookieConsent, { Cookies } from "react-cookie-consent";
+import CookieConsent from 'react-cookie-consent';
+import 'swiper/css';
 
 await fetchWorks();
-
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -16,8 +16,24 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <GlobalStyle />
       <App />
     </HashRouter>
-    <CookieConsent location="bottom" cookieName="myAwesomeCookieName3" enableDeclineButton expires={999} overlay>
-      This website uses cookies to enhance the user experience. We'll assume you're with this, but you can opt-out if you wish.
+    <CookieConsent
+      location='bottom'
+      cookieName='myAwesomeCookieName3'
+      enableDeclineButton
+      expires={999}
+      overlay
+      buttonText='Accept'
+      declineButtonText='Set Cookies'
+      style={{ background: 'black', color: 'white' }}
+      buttonStyle={{ background: 'white', color: 'black' }}
+      declineButtonStyle={{
+        background: 'black',
+        color: 'white',
+        textDecoration: 'underline',
+      }}
+    >
+      This website uses cookies to enhance the user experience. We'll assume
+      you're with this, but you can opt-out if you wish.
     </CookieConsent>
   </React.StrictMode>
 );

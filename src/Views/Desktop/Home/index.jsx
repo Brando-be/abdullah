@@ -1,23 +1,31 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { works } from '../../../Constants/Works';
 import { BjornTextTop, fadeDelay } from '../../../style';
 import { BackgroundText } from './BackgroundText';
 import { WorkImage } from './WorkImage';
-import arrowButton from '../../../assets/arrowButton.svg';
-import useMousePos from '../../../utils/useMousePos';
+// import arrowButton from '../../../assets/arrowButton.svg';
+// import useMousePos from '../../../utils/useMousePos';
 import { useTranslation } from 'react-i18next';
 import { LanguageChange } from '../../../Components/LanguageChange';
+// Import Swiper React components
+import { Swiper, SwiperSlide } from 'swiper/react';
+// Import Swiper styles
+import 'swiper/css';
+// import required modules
+import { Autoplay, Keyboard } from 'swiper';
+import './styles.css';
 
 const HomeWrapper = styled.div`
+  background-color: #e3e3e3;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr;
   height: ${window.innerHeight}px;
   max-height: 100vh;
   grid-gap: 2rem;
-  background-color: ${(props) => props.backgroundcolor};
+  /* background-color: ${(props) => props.backgroundcolor}; */
   transition: all 0.3s ease-in;
 `;
 
@@ -65,10 +73,10 @@ const ShowReelWrapper = styled.div`
   align-self: center;
   display: flex;
   flex-flow: column;
-  position:absolute;
-  bottom:0;
-  top:0;
-  height:100%;
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  height: 100%;
 `;
 
 const NavWrapper = styled.div`
@@ -89,7 +97,7 @@ const StyledLink = styled(Link)`
   text-decoration: none;
   color: black;
   font-size: 0.8vw;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   margin: 0;
   :hover {
     text-decoration: underline;
@@ -119,43 +127,46 @@ export const Home = () => {
 
   const [workRefs, setWorkRefs] = useState([]);
 
-  const { x, y } = useMousePos();
+  // const { x, y } = useMousePos();
 
-  const scrollDirectionDiv = (e) => {
-    if(e.target.scrollTop > (e.target.scrollHeight - (e.target.scrollHeight / 100) * 15)){
-      //scrollRef.current.scrollTo(0,0);
-      window.location.reload(true)
-    }
-    const devideBy = scrollRef.current.scrollHeight / works.length;
-    const scrollDevided = e.target.scrollTop / devideBy + 1;
-    setActiveWork(Math.round(scrollDevided));
-  };
+  // const scrollDirectionDiv = (e) => {
+  //   if (
+  //     e.target.scrollTop >
+  //     e.target.scrollHeight - (e.target.scrollHeight / 100) * 15
+  //   ) {
+  //     //scrollRef.current.scrollTo(0,0);
+  //     window.location.reload(true);
+  //   }
+  //   const devideBy = scrollRef.current.scrollHeight / works.length;
+  //   const scrollDevided = e.target.scrollTop / devideBy + 1;
+  //   setActiveWork(Math.round(scrollDevided));
+  // };
 
-  //const colors = ['white', 'green', 'blue', 'red'];
+  // const colors = ['white', 'green', 'blue', 'red'];
   const colors = ['#e3e3e3', '#e3e3e3', '#e3e3e3', '#e3e3e3'];
 
-  useEffect(() => {
-    const dividedNr = Math.floor(activeWork / 4);
-    if (dividedNr < colors.length) {
-      setBgColor(colors[dividedNr]);
-    } else {
-      setBgColor(colors[0]);
-    }
-    if (activeWork == works.length) {
-      setTimeout(() => {
-        scrollRef.current.scrollTo(0,0);
-      }, 10000);
-    }
-  }, [activeWork]);
+  // useEffect(() => {
+  //   const dividedNr = Math.floor(activeWork / 4);
+  //   if (dividedNr < colors.length) {
+  //     setBgColor(colors[dividedNr]);
+  //   } else {
+  //     setBgColor(colors[0]);
+  //   }
+  //   if (activeWork == works.length) {
+  //     setTimeout(() => {
+  //       scrollRef.current.scrollTo(0, 0);
+  //     }, 10000);
+  //   }
+  // }, [activeWork]);
 
-  useEffect(() => {
-    const scroll = setInterval(
-      () => workRefs[activeWork].current.scrollIntoView(),
-      10000
-    );
+  // useEffect(() => {
+  //   const scroll = setInterval(
+  //     () => workRefs[activeWork].current.scrollIntoView(),
+  //     10000
+  //   );
 
-    return () => clearInterval(scroll);
-  }, [activeWork]);
+  //   return () => clearInterval(scroll);
+  // }, [activeWork]);
 
   const { t, i18n } = useTranslation();
 
@@ -169,20 +180,41 @@ export const Home = () => {
         </LinkWrapper>
       </NavWrapper>
       <ShowReelWrapper>
-        <WorkWrapper ref={scrollRef} onScroll={(e) => scrollDirectionDiv(e)}>
-          {works.map((work, index) => {
-            const newRef = useRef();
-            return (
-              <WorkImage
-                index={index}
-                work={work}
-                ref={newRef}
-                workRefs={workRefs}
-                setWorkRefs={setWorkRefs}
-                worksLength={works.length}
-              />
-            );
-          })}
+        <WorkWrapper
+          ref={scrollRef}
+          // onScroll={(e) => scrollDirectionDiv(e)}
+        >
+          <Swiper
+            direction={'vertical'}
+            autoplay={{ disableOnInteraction: false }}
+            speed={1000}
+            modules={[Keyboard, Autoplay]}
+            id='desktopHomeSlider'
+            keyboard={{
+              enabled: true,
+              onlyInViewport: false,
+            }}
+            loop
+            onRealIndexChange={(e) => {
+              setActiveWork(e.realIndex + 1 || 1);
+            }}
+          >
+            {works.map((work, index) => {
+              const newRef = useRef();
+              return (
+                <SwiperSlide>
+                  <WorkImage
+                    index={index}
+                    work={work}
+                    ref={newRef}
+                    workRefs={workRefs}
+                    setWorkRefs={setWorkRefs}
+                    worksLength={works.length}
+                  />
+                </SwiperSlide>
+              );
+            })}
+          </Swiper>
         </WorkWrapper>
       </ShowReelWrapper>
       <BackgroundText />

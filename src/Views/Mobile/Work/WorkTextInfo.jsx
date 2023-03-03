@@ -38,6 +38,8 @@ const WorkDetailInfoText = styled.p`
 `;
 
 const WorkTextWrapper = styled.div`
+  position: absolute;
+  min-width: 75vw;
   grid-column: 1;
   grid-row: 1;
   display: flex;
@@ -47,10 +49,14 @@ const WorkTextWrapper = styled.div`
   max-height: 90vh;
   overflow-y: scroll;
   z-index: 200;
-  background: white;
+  background: #e3e3e3;
   padding: 0 2rem;
-  display: ${(props) => (props.show ? 'box' : 'none')};
-  animation: ${SlideUpAnimation} 0.5s ease-out;
+
+  transform: ${(props) =>
+    props.show ? 'translateY(0vh)' : 'translateY(110vh)'};
+  /* display: ${(props) => (props.show ? 'box' : 'none')}; */
+  /* animation: ${SlideUpAnimation} 0.5s ease-out; */
+  transition: all 0.5s ease-out;
 `;
 
 export const WorkTextInfo = ({ work, showText }) => {

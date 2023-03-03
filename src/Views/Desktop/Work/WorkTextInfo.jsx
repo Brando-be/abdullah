@@ -5,7 +5,7 @@ import i18n from '../../../i18n';
 
 const SlideUpAnimation = keyframes`
   from{
-   transform: translateY(50vw);
+   transform: translateY(100vw);
   }
 
   to{
@@ -49,16 +49,20 @@ const WorkTextWrapper = styled.div`
   width: 100%;
   margin: auto;
   z-index: 300;
-  background: white;
+  background: #e3e3e3;
+  position: fixed;
 
-  display: ${(props) => (props.show ? 'box' : 'none')};
-  animation: ${SlideUpAnimation} 0.5s ease-out;
+  transform: ${(props) =>
+    props.show ? 'translateY(0vh)' : 'translateY(110vh)'};
+  /* display: ${(props) => (props.show ? 'box' : 'none')}; */
+  /* animation: ${SlideUpAnimation} 0.5s ease-out; */
+  transition: all 0.5s ease-out;
 `;
 
 const Link = styled.a`
   text-decoration: none;
   font-size: 0.8vw;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   margin: 0;
 
   :hover {
@@ -78,7 +82,9 @@ export const WorkTextInfo = ({ work, showText }) => {
         <WorkDetailInfoLabel>{t('Year')}</WorkDetailInfoLabel>
         <WorkDetailInfoText>{work.acf.year}</WorkDetailInfoText>
         <WorkDetailInfoLabel>{t('Client')}</WorkDetailInfoLabel>
-        <Link href={work.acf.client_url} target="_blank"><WorkDetailInfoText>{work.acf.client}</WorkDetailInfoText></Link>
+        <Link href={work.acf.client_url} target='_blank'>
+          <WorkDetailInfoText>{work.acf.client}</WorkDetailInfoText>
+        </Link>
         <WorkDetailInfoLabel>{t('Location')}</WorkDetailInfoLabel>
         <WorkDetailInfoText>{work.acf.location}</WorkDetailInfoText>
         <WorkDetailInfoLabel>{t('Size')}</WorkDetailInfoLabel>
@@ -86,7 +92,9 @@ export const WorkTextInfo = ({ work, showText }) => {
         <WorkDetailInfoLabel>{t('Status')}</WorkDetailInfoLabel>
         <WorkDetailInfoText>{t(work.acf.status)}</WorkDetailInfoText>
         <WorkDetailInfoLabel>{t('Photography')}</WorkDetailInfoLabel>
-        <Link href={work.acf.photographer_url_} target="_blank"><WorkDetailInfoText>{work.acf.photography}</WorkDetailInfoText></Link>
+        <Link href={work.acf.photographer_url_} target='_blank'>
+          <WorkDetailInfoText>{work.acf.photography}</WorkDetailInfoText>
+        </Link>
       </WorkDetailInfoList>
     </WorkTextWrapper>
   );

@@ -15,10 +15,10 @@ const Cirlce = styled.div`
   mix-blend-mode: difference;
   border-radius: 100%;
   transform: translate(-50%, -50%);
-  -webkit-transition-duration: 80ms;
-  transition-duration: 80ms;
-  -webkit-transition-timing-function: ease-out;
-  transition-timing-function: ease-out;
+  /* -webkit-transition-duration: 80ms; */
+  /* transition-duration: 80ms; */
+  /* -webkit-transition-timing-function: ease-out; */
+  /* transition-timing-function: ease-out; */
   will-change: width, height, transform, border;
   z-index: 999;
   white-space: nowrap;

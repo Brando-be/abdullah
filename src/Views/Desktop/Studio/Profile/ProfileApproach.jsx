@@ -12,24 +12,23 @@ const AproachWrapper = styled.div`
 `;
 
 const AproachText = styled.p`
-  font-size: 2.8rem;
-  font-size: 1.25vw;
-  margin-bottom: 2rem;
+  font-size: 2.4rem;
+  margin-bottom: 3rem;
+  font-weight: 500;
 `;
 
 const AproachTitle = styled.span`
-  font-size: 2.6rem;
+  font-size: 2rem;
   text-transform: uppercase;
   font-family: Base Grotesk, sans-serif;
+  font-weight: 400;
 `;
 
 export const ProfileAproach = () => {
   const { t } = useTranslation();
   return (
     <AproachWrapper>
-      <AproachText>
-      {t('AboutApproch')}
-      </AproachText>
+      <AproachText>{t('AboutApproch')}</AproachText>
       <AproachText>
         <AproachTitle>{t('Briefing')}</AproachTitle> <br />
         {t('BriefingText')}

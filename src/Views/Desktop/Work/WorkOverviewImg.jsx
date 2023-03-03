@@ -2,15 +2,15 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const OverviewImgWrapper = styled.div`
-  margin: 30vh 0;
-  width: 100%;
-  height: 50vh;
+  margin: 90px 0;
+  /* width: 100%; */
+  height: 60vh;
   display: flex;
   flex-flow: column;
   align-items: center;
   gap: 0.8rem;
   font-size: 0.8vw;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
 
   p {
     opacity: 0;
@@ -23,13 +23,13 @@ const OverviewImgWrapper = styled.div`
 
   :hover img {
     opacity: 0.5;
-    transform: scale(0.95);
+    /* transform: scale(0.95); */
   }
 `;
 
 const WorkImg = styled.img`
   height: 100%;
-  width: max-content;
+  /* width: max-content; */
   aspect-ratio: 3/2;
   object-fit: contain;
   scroll-snap-align: center;
@@ -44,10 +44,7 @@ export const WorkOverviewImg = ({ work }) => {
   };
   return (
     <OverviewImgWrapper onClick={() => navigateToDetail(work.acf.title)}>
-      <WorkImg
-        src={`${imgName.url}`}
-        alt={`${imgName.alt}`}
-      />
+      <WorkImg src={`${imgName.url}`} alt={`${imgName.alt}`} />
       <p>
         {work.acf.title}, {work.acf.year}
       </p>

@@ -1,32 +1,35 @@
 import { useTranslation } from 'react-i18next';
+import MailchimpSubscribe from 'react-mailchimp-subscribe';
 import { useEffect, useState } from 'react';
 import Div100vh from 'react-div-100vh';
 import styled from 'styled-components';
-import { BjornTextTopMobile } from '../../../style';
-
-const InfoContactWrapper = styled(Div100vh)`
-  padding: 2rem;
-`;
+import NewsletterForm from '../../Desktop/Studio/Info/NewsletterForm';
 
 const InfoContactText = styled.p`
-  font-size: 1.2vw;
-  font-size: 2.4rem;
-  padding-top: 5rem;
+  font-size: 2rem;
+  padding-top: 2rem;
+`;
+
+const InfoContactTextDiv = styled.div`
+  font-size: 2rem;
+  padding-top: 2rem;
 `;
 
 const ContactTitle = styled.span`
   text-transform: uppercase;
   font-family: Base Grotesk, sans-serif;
+  font-size: 1.2rem;
 `;
 
 const ViewOnMapLink = styled.a`
-  font-size: 1.2vw;
-  font-size: 2.4rem;
+  display: block;
+  padding-top: 20px;
+  font-size: 2rem;
   color: black;
   text-decoration: underline dotted;
 `;
 
-export const InfoContact = () => {
+export const InfoContact = ({ styles }) => {
   const { t } = useTranslation();
   const [time, setTime] = useState(
     new Date().toLocaleString('en-GB', {
@@ -36,6 +39,9 @@ export const InfoContact = () => {
       second: '2-digit',
     })
   );
+
+  const MAILCHIMP_URL =
+    'https://studio.us10.list-manage.com/subscribe/post?u=ca105599d3f7f3c21814b1c6f&amp;id=5d0818837f&amp;f_id=007ec9e5f0';
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -53,48 +59,62 @@ export const InfoContact = () => {
       clearInterval(timer);
     };
   }, []);
+  const style = styles ? styles : {};
   return (
-    <InfoContactWrapper>
-      <BjornTextTopMobile to='/home'>Info</BjornTextTopMobile>
-
+    <div style={{ ...style, margin: '0 -2rem' }}>
       <InfoContactText>
         {t('Adress')}
         <br />
         {t('Adress2')}
+        <br />+{t('Phone')}
         <br />
-        +{t('Phone')}
-        <br />
-        <ViewOnMapLink
-          href={t('MapUrl')}
-          target='_blank'>
+        <ViewOnMapLink href={t('MapUrl')} target='_blank'>
           {t('ViewOnMap')}
         </ViewOnMapLink>
       </InfoContactText>
       <InfoContactText>
         <ContactTitle>{t('GeneralInquiries')}</ContactTitle>
         <br />
-        <a href={"mailto:" + t("GeneralEmail")}>
-        {t('GeneralEmail')}
-        </a>
+        <a href={'mailto:' + t('GeneralEmail')}>{t('GeneralEmail')}</a>
       </InfoContactText>
       <InfoContactText>
         <ContactTitle>{t('JobsInternships')}</ContactTitle>
         <br />
-        <a href={"mailto:" + t("JobEmail")}>{t('JobEmail')}</a>
+        <a href={'mailto:' + t('JobEmail')}>{t('JobEmail')}</a>
       </InfoContactText>
       <InfoContactText>
         <ContactTitle>Instagram</ContactTitle>
         <br />
-        <a href={"https://www.instagram.com/" + t("Instagram").replace('@', '')} target='_blank'>
-        {t('Instagram')}
+        <a
+          href={'https://www.instagram.com/' + t('Instagram').replace('@', '')}
+          target='_blank'
+        >
+          {t('Instagram')}
         </a>
       </InfoContactText>
       <InfoContactText>
         <ContactTitle>{t('OfficeHours')}</ContactTitle>
         <br />
-        {t('MondayFriday')}: {t('OfficeHrs')}<br />
+        {t('MondayFriday')}: {t('OfficeHrs')}
+        <br />
         {t('BelgiumCurrentTime')}: {time}
       </InfoContactText>
-    </InfoContactWrapper>
+      <InfoContactTextDiv>
+        <ContactTitle>Get Our Updates</ContactTitle>
+        <MailchimpSubscribe
+          url={MAILCHIMP_URL}
+          render={(props) => {
+            const { subscribe, status, message } = props || {};
+            return (
+              <NewsletterForm
+                status={status}
+                message={message}
+                subscribe={subscribe}
+              />
+            );
+          }}
+        />
+      </InfoContactTextDiv>
+    </div>
   );
 };
