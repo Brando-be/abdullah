@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import styled , { keyframes } from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 const StudioProfileWrapper = styled.div`
   grid-column: 2/5;
@@ -46,21 +46,25 @@ const Fade = styled.p`
   color: #fff;
   z-index: 50;
   grid-column: 1/3;
-  height: max-content;
-  animation: ${props => props.out ? fadeIn : fadeOut} 1s linear;
-  transition:visibility 1s linear;
-  visibility: ${props => props.out ? "visible" : "hidden"} ;
+  /* height: max-content; */
+  /* animation: ${(props) => (props.out ? fadeIn : fadeOut)} 1s linear; */
+  transition: all 0.5s linear;
+  /* visibility: ${(props) => (props.out ? 'visible' : 'hidden')}; */
+  max-height: ${(props) => (props.out ? '400px' : '0')};
+  height: auto;
+  overflow: hidden;
 `;
-
 
 const ReadMoreButton = styled.button`
   font-size: 1.4vw;
   font-size: 2.8rem;
-  text-decoration: underline dotted;
   font-family: Suisse Works, serif;
   grid-column: 1;
   align-self: flex-start;
   justify-self: start;
+  span {
+    text-decoration: underline dotted;
+  }
 `;
 
 const HoverSpan = styled.span`
@@ -71,40 +75,42 @@ const HoverSpan = styled.span`
 
 const fadeIn = keyframes`
   from {
-    transform: scale(.25);
-    opacity: 0;
+    /* transform: scale(.25);
+    opacity: 0; */
+    max-height: 0;
   }
 
   to {
-    transform: scale(1);
-    opacity: 1;
+    max-height: 2000px;
+    /* transform: scale(1);
+    opacity: 1; */
   }
 `;
 
 const fadeOut = keyframes`
   from {
-    transform: scale(1);
-    opacity: 1;
+    /* transform: scale(1); */
+    /* opacity: 1; */
+    max-height: 2000px;
   }
 
   to {
-    transform: scale(.25);
-    opacity: 0;
+    /* transform: scale(.25); */
+    /* opacity: 0; */
+    max-height: 0;
   }
 `;
 
 export const ProfileAbout = () => {
-  const [readMore, setReadMore] = useState(false);
+  // const [readMore, setReadMore] = useState(false);
   const [fade, setFade] = useState(false);
   const [backgroundImage, setBackgroundImage] = useState(null);
   const { t } = useTranslation();
 
   const toggleReadMore = () => {
     setFade(!fade);
-    setTimeout(() => (
-      setReadMore(!readMore)
-    ),1000)
-  }
+    // setTimeout(() => setReadMore(!readMore), 1000);
+  };
   return (
     <StudioProfileWrapper>
       <StudioProfileTextWrapper image={backgroundImage}>
@@ -112,23 +118,25 @@ export const ProfileAbout = () => {
           {t('Established')}{' '}
           <HoverSpan
             onMouseEnter={() => setBackgroundImage('bjorn')}
-            onMouseLeave={() => setBackgroundImage(null)}>
+            onMouseLeave={() => setBackgroundImage(null)}
+          >
             Bjorn Verlinde¹
           </HoverSpan>{' '}
           {t('Designer')}{' '}
           <HoverSpan
             onMouseEnter={() => setBackgroundImage('team')}
-            onMouseLeave={() => setBackgroundImage(null)}>
+            onMouseLeave={() => setBackgroundImage(null)}
+          >
             team²
           </HoverSpan>{' '}
         </StudioProfileText>
-        {readMore ? (
-          <Fade out={fade}>{t('AboutMore')}</Fade>
-       ) : (
-          ''
-        )}
+        {/* {readMore ? 
+        <Fade out={fade}>{t('AboutMore')}</Fade> 
+        : ''} */}
+        <Fade out={fade}>{t('AboutMore')}</Fade>
         <ReadMoreButton onClick={() => toggleReadMore()}>
-          {readMore ? `- ${t('ReadLess')}` : `+ ${t('ReadMore')}`}
+          {fade ? '-' : '+'}{' '}
+          <span>{fade ? `${t('ReadLess')}` : `${t('ReadMore')}`}</span>
         </ReadMoreButton>
       </StudioProfileTextWrapper>
     </StudioProfileWrapper>

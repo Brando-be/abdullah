@@ -16,7 +16,9 @@ const HomeWrapper = styled(Div100vh)`
 `;
 
 const LogoImg = styled.img`
-  width: 100%;
+  width: 90%;
+  fill: white;
+  color: white;
 `;
 
 const NavLink = styled(Link)`
@@ -25,13 +27,13 @@ const NavLink = styled(Link)`
   align-items: center;
 `;
 
-
-
 export const MobileScreen = () => {
   const [vh, setVh] = useState(`${window.innerHeight}px`);
   return (
     <HomeWrapper vh={vh} backgroundimg='./bjorn.jpg'>
-      <NavLink to='/home'><LogoImg src='./logo.svg'></LogoImg></NavLink>
+      <NavLink to='/home'>
+        <LogoImg src='./logo.svg'></LogoImg>
+      </NavLink>
     </HomeWrapper>
   );
 };

@@ -13,13 +13,17 @@ export const fade = keyframes`
 
 export const fadeDelay = css`
   opacity: 0;
-  animation: ${fade} 3s ease-in 3.5s forwards;
+  animation: ${fade} 1s ease-in 1s forwards;
 `;
+
+// animation: ${fade} 3s ease-in 3.5s forwards;
 
 export const fadeDelayWork = css`
   opacity: 0;
-  animation: ${fade} .5s ease-in 1s forwards;
+  animation: ${fade} 1s ease-in forwards;
 `;
+
+//   animation: ${fade} .5s ease-in 1s forwards;
 
 export const BjornTextTop = styled(Link)`
   text-decoration: none;
@@ -40,7 +44,7 @@ export const StyledLink = styled(Link)`
   text-decoration: none;
   color: black;
   font-size: 0.8vw;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   margin: 0;
 
   :hover {

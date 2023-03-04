@@ -13,19 +13,19 @@ const ImageWrapper = styled.div`
 `;
 
 const FirstImage = styled.img`
-  grid-column: 2/4;
+  /* grid-column: 2/4;
   grid-row: 1;
   width: 110%;
   aspect-ratio: 3/2;
   object-fit: contain;
   align-self: center;
   justify-self: center;
-  z-index: 3;
+  z-index: 3; */
 `;
 
 const WorkTitle = styled.p`
   font-size: 0.8vw;
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   margin-top: 0.8rem;
 `;
 
@@ -41,7 +41,6 @@ export const WorkImage = ({
   const navigateToDetail = (workTitle) => {
     navigate(`work/${workTitle}`);
   };
-  
 
   const imageName = work.acf.images[0].image.url;
 
@@ -57,11 +56,9 @@ export const WorkImage = ({
       ref={workRef}
       last={index + 1 === worksLength ? true : false}
       onClick={() => navigateToDetail(work.acf.title)}
-      key={index}>
-      <FirstImage
-        src={`${imageName}`}
-        alt='foto'
-      />
+      key={index}
+    >
+      <FirstImage src={`${imageName}`} alt='foto' />
       <WorkTitle key={index}>
         {work.acf.title}, {work.acf.year}
       </WorkTitle>

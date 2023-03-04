@@ -8,6 +8,21 @@ import { works } from '../../../Constants/Works';
 import { BjornTextTopMobile, fadeDelay, StyledLink } from '../../../style';
 import { WorkImage } from './WorkImage';
 import Div100vh from 'react-div-100vh';
+// Import Swiper React components
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Keyboard } from 'swiper';
+// Import Swiper styles
+import 'swiper/css';
+// import required modules
+
+// const Check = styled.div`
+//   background-color: blue;
+//   overflow: hidden;
+// `;
+
+// const WorkImage = ({ work, index, imgRefs, setImgRefs }) => {
+//   return <Check>'hello'</Check>;
+// };
 
 const HomeWrapper = styled(Div100vh)`
   display: flex;
@@ -23,7 +38,6 @@ const TopWrapper = styled.div`
   font-family: Base Grotesk, sans-serif;
   padding: 2rem;
   height: 2rem;
-  
 
   p {
     font-size: 0.8vw;
@@ -52,6 +66,7 @@ const NavWrapper = styled.div`
   font-size: 0.8vw;
   font-size: 1.6rem;
   padding: 2rem 0rem 2rem 2rem;
+  line-height: 1.6rem;
   a {
     font-size: 0.8vw;
     font-size: 1.6rem;
@@ -75,32 +90,32 @@ export const Home = () => {
   const [imgRefs, setImgRefs] = useState([]);
   const [bgColor, setBgColor] = useState('white');
   const [vh, setVh] = useState(`${window.innerHeight}px`);
-  const scrollRef = useRef();
+  // const scrollRef = useRef();
 
-  useEffect(() => {
-    // if (activeWork >= works.length) {
-    //   return;
-    // }
-    const scroll = setInterval(
-      () => imgRefs[activeWork].current.scrollIntoView(),
-      10000
-    );
+  // useEffect(() => {
+  // if (activeWork >= works.length) {
+  //   return;
+  // }
+  // const scroll = setInterval(
+  //   () => imgRefs[activeWork].current.scrollIntoView(),
+  //   10000
+  // );
 
-    return () => clearInterval(scroll);
-  }, [activeWork]);
+  //   return () => clearInterval(scroll);
+  // }, [activeWork]);
 
   useEffect(() => {
     setVh(`${window.innerHeight}px`);
   }, [window.innerHeight]);
 
   const scrollDirection = (e) => {
-    const devideBy = scrollRef.current.scrollHeight / works.length;
-    const scrollDevided = e.target.scrollTop / devideBy + 1;
-    if (Math.round(scrollDevided) < 1) {
-      setActiveWork(1);
-    } else {
-      setActiveWork(Math.round(scrollDevided));
-    }
+    // const devideBy = scrollRef.current.scrollHeight / works.length;
+    // const scrollDevided = e.target.scrollTop / devideBy + 1;
+    // if (Math.round(scrollDevided) < 1) {
+    //   setActiveWork(1);
+    // } else {
+    //   setActiveWork(Math.round(scrollDevided));
+    // }
   };
   const colors = ['#e3e3e3', '#e3e3e3', '#e3e3e3', '#e3e3e3'];
 
@@ -112,7 +127,9 @@ export const Home = () => {
       setBgColor(colors[0]);
     }
   }, [activeWork]);
+
   const { t } = useTranslation();
+
   return (
     <HomeWrapper vh={vh} backgroundcolor={bgColor}>
       <TopWrapper>
@@ -123,20 +140,40 @@ export const Home = () => {
           {activeWork}/{works.length}
         </p>
       </TopWrapper>
-      <WorkWrapper ref={scrollRef} onScroll={(e) => scrollDirection(e)}>
+      {/* <WorkWrapper
+      ref={scrollRef} onScroll={(e) => scrollDirection(e)}
+      > */}
+      <Swiper
+        direction={'vertical'}
+        autoplay={{ disableOnInteraction: false }}
+        speed={1000}
+        modules={[Autoplay, Keyboard]}
+        className='cuSwiper'
+        keyboard={{
+          enabled: true,
+          onlyInViewport: false,
+        }}
+        loop
+        onRealIndexChange={(e) => {
+          setActiveWork(e.realIndex + 1 || 1);
+        }}
+      >
         {works.map((work, index) => {
           return (
-            <WorkImage
-              key={index}
-              index={index}
-              work={work}
-              worksLength={works.length}
-              imgRefs={imgRefs}
-              setImgRefs={setImgRefs}
-            />
+            <SwiperSlide>
+              <WorkImage
+                key={index}
+                index={index}
+                work={work}
+                worksLength={works.length}
+                imgRefs={imgRefs}
+                setImgRefs={setImgRefs}
+              />
+            </SwiperSlide>
           );
         })}
-      </WorkWrapper>
+      </Swiper>
+      {/* </WorkWrapper> */}
       <FooterWrapper>
         <NavWrapper>
           <NavLink to='/work'>{t('Work')}</NavLink>
@@ -145,7 +182,12 @@ export const Home = () => {
           {', '}
           <NavLink to='/info'>Info</NavLink>
           {', '}
-          <a href={"https://www.instagram.com/" + t("Instagram").replace('@', '')} target='_blank'>
+          <a
+            href={
+              'https://www.instagram.com/' + t('Instagram').replace('@', '')
+            }
+            target='_blank'
+          >
             Instagram
           </a>
         </NavWrapper>

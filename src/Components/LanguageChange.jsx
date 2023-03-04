@@ -11,6 +11,8 @@ const LanguageButton = styled.button`
   margin: 0 2rem 2rem 0;
   font-size: 1vw;
   font-size: 2rem;
+  z-index: 99;
+  position: relative;
   color: black;
   @media (max-width: 860px) {
     font-size: 1.6rem;
@@ -28,7 +30,8 @@ export const LanguageChange = () => {
     <LanguageButton
       onClick={() =>
         language === 'en' ? setLanguage('nl') : setLanguage('en')
-      }>
+      }
+    >
       {language}
     </LanguageButton>
   );

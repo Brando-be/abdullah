@@ -15,3 +15,6 @@ temp
 TODOs.md
 .eslintcache
 .env
+Wordpress_backup
+# Local Netlify folder
+.netlify

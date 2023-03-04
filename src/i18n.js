@@ -9,7 +9,7 @@ import { resources } from './i18n/resources';
 i18n.use(Backend).use(LanguageDetector).use(initReactI18next).init({
   resources,
   fallbackLng: 'en',
-  debug: true,
+  // debug: true,
 });
 
 export default i18n;

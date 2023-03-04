@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { resources } from '../../../../i18n/resources';
 
 import people1 from '../../../../assets/img/people/people1.jpg';
 import people2 from '../../../../assets/img/people/people2.jpg';
@@ -36,23 +35,38 @@ const WorkerInfoText = styled.a`
 `;
 
 export const ProfilePeople = () => {
-  const Peopels = resources.en.translation.Peoples
   return (
     <PeopleWrapper>
-      {Peopels.map((people, index) => {
-        return(
-          <WorkerWrapper>
-            <WorkerImage src={people.image.url} />
-            <WorkerInfoText>{people.designation}</WorkerInfoText>
-            <WorkerInfoText href={'tel:+'+ people.mobile_number}>
-              {"+"+people.mobile_number}
-            </WorkerInfoText>
-            <WorkerInfoText href={"mailto:" + people.email}>
-              {people.email}
-            </WorkerInfoText>
-          </WorkerWrapper>
-        )
-      })}
+      <WorkerWrapper>
+        <WorkerImage src={people1} />
+        <WorkerInfoText>Architect, Founder Partner</WorkerInfoText>
+        <WorkerInfoText href='tel:+32 492 354 099'>
+          +32 492 354 099
+        </WorkerInfoText>
+        <WorkerInfoText href='mailto:bv@bjornverlinde.studio'>
+          bv@bjornverlinde.studio
+        </WorkerInfoText>
+      </WorkerWrapper>
+      <WorkerWrapper>
+        <WorkerImage src={people2} />
+        <WorkerInfoText>Designer</WorkerInfoText>
+        <WorkerInfoText href='tel:+32 492 354 099'>
+          +32 492 354 099
+        </WorkerInfoText>
+        <WorkerInfoText href='mailto:bb@bjornverlinde.studio'>
+          bb@bjornverlinde.studio
+        </WorkerInfoText>
+      </WorkerWrapper>
+      <WorkerWrapper>
+        <WorkerImage src={people3} />
+        <WorkerInfoText>Founding Partner</WorkerInfoText>
+        <WorkerInfoText href='tel:+32 492 354 099'>
+          +32 492 354 099
+        </WorkerInfoText>
+        <WorkerInfoText href='mailto:sb@bjornverlinde.studio'>
+          sb@bjornverlinde.studio
+        </WorkerInfoText>
+      </WorkerWrapper>
     </PeopleWrapper>
   );
 };

@@ -2,7 +2,12 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import { LanguageChange } from '../../../../Components/LanguageChange';
-import { BackToHomeLink, BjornTextTop, StyledLink, Underline } from '../../../../style';
+import {
+  BackToHomeLink,
+  BjornTextTop,
+  StyledLink,
+  Underline,
+} from '../../../../style';
 import { infoViews } from './infoViews';
 import { InfoViewSwitch } from './InfoViewSwitch';
 
@@ -23,10 +28,11 @@ const NavWrapper = styled.div`
 `;
 
 const LinkWrapper = styled.div`
-    margin: 0.5rem 0 0 0;
+  margin: 0.5rem 0 0 0;
 `;
 
 const StudioInfoButtonsWrapper = styled.div`
+  display: flex;
   grid-column: 2;
   font-size: 1vw;
   font-size: 2rem;
@@ -38,6 +44,7 @@ const StudioInfoButton = styled.button`
   font-size: 1vw;
   font-size: 2rem;
   margin: 0;
+  padding-right: 5px;
   margin-bottom: 2rem;
   margin-right: 0.1rem;
   :hover {
@@ -61,7 +68,7 @@ export const StudioInfo = () => {
         </LinkWrapper>
       </NavWrapper>
       <InfoViewSwitch view={infoView} />
-      <StudioInfoButtonsWrapper>
+      <StudioInfoButtonsWrapper style={{}}>
         <StudioInfoButton onClick={() => setInfoView(infoViews.CONTACT)}>
           {infoView === infoViews.CONTACT ? (
             <Underline>Contact</Underline>
@@ -77,9 +84,19 @@ export const StudioInfo = () => {
             'Imprint'
           )}
           ,
+        </StudioInfoButton>{' '}
+        <StudioInfoButton onClick={() => setInfoView(infoViews.PRIVACY)}>
+          {infoView === infoViews.PRIVACY ? (
+            <Underline>Privacy</Underline>
+          ) : (
+            'Privacy'
+          )}
+          ,
         </StudioInfoButton>
       </StudioInfoButtonsWrapper>
-      <BackToHomeLink to={'/'}>{t('BackHome')}</BackToHomeLink>
+      <BackToHomeLink to={'/'} style={{}}>
+        {t('BackHome')}
+      </BackToHomeLink>
       <LanguageChange />
     </StudioWrapper>
   );

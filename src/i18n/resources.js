@@ -6,6 +6,8 @@ export const resources = {
       Work: 'Work',
       Studio: 'The studio',
 
+      BackToWork: 'Back to Work',
+
       all: 'All',
       retail: 'Retail',
       hospitality: 'Hospitality',
@@ -56,13 +58,10 @@ export const resources = {
       AboutApproch: siteData.acf.en_description,
       Briefing: siteData.acf.en_briefing,
       BriefingText: siteData.acf.en_briefing_description,
-      Concept:siteData.acf.en_concept,
+      Concept: siteData.acf.en_concept,
       ConceptText: siteData.acf.en_concept_description,
       Realisation: siteData.acf.en_realisation,
       RealisationText: siteData.acf.en_realisation_description,
-
-      //Peoples
-      Peoples:siteData.acf.peoples,
 
       //Clients
       AboutClient: siteData.acf.about_client,
@@ -75,16 +74,14 @@ export const resources = {
       OfficeHours: 'Office Hours',
       MondayFriday: 'Monday—Friday',
       BelgiumCurrentTime: 'Belgium Current Time',
-      Adress:siteData.acf.adress,
-      Adress2:siteData.acf.adress_2,
+      Adress: siteData.acf.adress,
+      Adress2: siteData.acf.adress_2,
       Phone: siteData.acf.mobile_number,
       MapUrl: siteData.acf.map_url,
       GeneralEmail: siteData.acf.general_inquiries_email,
       JobEmail: siteData.acf.jobs_and_internships_email,
       Instagram: siteData.acf.instagram,
       OfficeHrs: siteData.acf.office_hours,
-      Imprint: siteData.acf.content_responsible,
-      Brands: siteData.acf.brands
 
     },
   },
@@ -92,6 +89,8 @@ export const resources = {
     translation: {
       Work: 'Werk',
       Studio: 'de Studio',
+
+      BackToWork: 'Terug aan het werk',
 
       all: 'Alles',
       retail: 'Winkel',
@@ -147,10 +146,10 @@ export const resources = {
       AboutApproch: siteData.acf.nl_description,
       Briefing: siteData.acf.nl_briefing,
       BriefingText: siteData.acf.nl_briefing_description,
-      Concept:siteData.acf.nl_concept,
+      Concept: siteData.acf.nl_concept,
       ConceptText: siteData.acf.nl_concept_description,
       Realisation: siteData.acf.nl_realisation,
-      RealisationText:siteData.acf.nl_realisation_description,
+      RealisationText: siteData.acf.nl_realisation_description,
 
       //Clients
       AboutClient: siteData.acf.nl_about_client,
@@ -163,16 +162,14 @@ export const resources = {
       OfficeHours: 'Kantooruren',
       MondayFriday: 'Maandag-vrijdag',
       BelgiumCurrentTime: 'Locale Belgische Tijd',
-      Adress:siteData.acf.adress,
-      Adress2:siteData.acf.adress_2,
+      Adress: siteData.acf.adress,
+      Adress2: siteData.acf.adress_2,
       Phone: siteData.acf.mobile_number,
       MapUrl: siteData.acf.map_url,
       GeneralEmail: siteData.acf.general_inquiries_email,
       JobEmail: siteData.acf.jobs_and_internships_email,
       Instagram: siteData.acf.instagram,
       OfficeHrs: siteData.acf.office_hours,
-      Imprint: siteData.acf.content_responsible,
-      Brands: siteData.acf.brands
     },
   },
 };

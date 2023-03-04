@@ -9,6 +9,7 @@ const WorkIndexWrapper = styled.div`
   grid-template-columns: 1.5fr 1fr;
   border-bottom: solid 0.1rem;
   margin-bottom: 0.5rem;
+  font-weight: 400;
 `;
 
 const WorkYear = styled.p`
