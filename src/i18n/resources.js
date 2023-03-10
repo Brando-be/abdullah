@@ -4,7 +4,7 @@ export const resources = {
   en: {
     translation: {
       Work: 'Work',
-      Studio: 'The studio',
+      Studio: 'The Studio',
 
       BackToWork: 'Back to Work',
 
@@ -31,7 +31,7 @@ export const resources = {
 
       For: 'For',
       Text: 'Text',
-      Images: 'images',
+      Images: 'Images',
 
       //mobile detail text
       ReadText: 'Read text',
@@ -68,12 +68,12 @@ export const resources = {
       SelectedClients: siteData.acf.extra_about_client,
 
       //Info
-      ViewOnMap: 'View on map',
+      ViewOnMap: 'View on Google Maps',
       GeneralInquiries: 'General inquiries',
       JobsInternships: 'Jobs & Internships',
       OfficeHours: 'Office Hours',
-      MondayFriday: 'Monday—Friday',
-      BelgiumCurrentTime: 'Belgium Current Time',
+      MondayFriday: 'Monday — Friday',
+      BelgiumCurrentTime: 'Current Local Time',
       Adress: siteData.acf.adress,
       Adress2: siteData.acf.adress_2,
       Phone: siteData.acf.mobile_number,
@@ -88,15 +88,15 @@ export const resources = {
   nl: {
     translation: {
       Work: 'Werk',
-      Studio: 'de Studio',
+      Studio: 'De Studio',
 
-      BackToWork: 'Terug aan het werk',
+      BackToWork: 'Terug',
 
       all: 'Alles',
-      retail: 'Winkel',
+      retail: 'Retail',
       hospitality: 'Horeca',
-      'Public space': 'Publieke plaats',
-      private: 'Privé',
+      'Public space': 'Openbare ruimte',
+      private: 'Residentieel',
       object: 'Object',
 
       //filter by
@@ -107,11 +107,11 @@ export const resources = {
 
       Year: 'Jaar',
       Client: 'Klant',
-      Location: 'Plaats',
-      Size: 'Grote',
+      Location: 'Locatie',
+      Size: 'Oppervlakte',
       Status: 'Status',
-      'In Progress': 'In de maak',
-      Completed: 'Afgewerkt',
+      'In Progress': 'In uitvoering',
+      Completed: 'Voltooid',
       Photography: 'Fotografie',
 
       For: 'Voor',
@@ -129,7 +129,7 @@ export const resources = {
 
       About: 'Over',
       Approach: 'Aanpak',
-      People: 'Mensen',
+      People: 'Team',
       //about
       Established: siteData.acf.nl_about_detail,
       Designer:
@@ -156,12 +156,12 @@ export const resources = {
       SelectedClients: siteData.acf.nl_extra_about_client,
 
       //info
-      ViewOnMap: 'Bekijk op kaart',
+      ViewOnMap: 'Google Maps',
       GeneralInquiries: 'Algemene vragen',
       JobsInternships: 'Vacatures en stages',
       OfficeHours: 'Kantooruren',
-      MondayFriday: 'Maandag-vrijdag',
-      BelgiumCurrentTime: 'Locale Belgische Tijd',
+      MondayFriday: 'Maandag — Vrijdag',
+      BelgiumCurrentTime: 'Lokale Tijd',
       Adress: siteData.acf.adress,
       Adress2: siteData.acf.adress_2,
       Phone: siteData.acf.mobile_number,
